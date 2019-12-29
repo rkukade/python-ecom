@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+</head>
+<body>
+    <center><h1>Product Information</h1></center>
+
+    <center>{{msg}}</center>
+    <br><br>
+    <form action="http://localhost:5000/product/save/" method="post">
+        Product Id : <input type="text" name="pid" value="{{prod.id}}" readonly> <br><br>
+        Product Name : <input type="text" name="pname" value="{{prod.name}}"> <br><br>
+        Product Price : <input type="text" name="pprice" value="{{prod.price}}"> <br><br>
+        Product Qty : <input type="text" name="pqty" value="{{prod.qty}}"> <br><br>
+        {{prod.vendor.name}} |  {{prod.vend.id}} <br><br>
+        Select Vendor : <select name="ven">
+
+                        <option value="0">----select----</option>
+
+                            {% for ven in vendors %}
+    {% if prod.vendor.id==ven.id%}
+        <option value="{{ven.id}}" selected>{{ven.name}}</option>
+     {% endif %}
+            <option value="{{ven.id}}" >{{ven.name}}</option>
+                            {% endfor %}
+
+                        </select>
+        <br><br>
+        <input type="submit">
+    </form>
+
+    <br>
+
+    {% if products %}
+
+    <table>
+            <thead>
+                <td>Product Id</td>
+                <td>Product Name</td>
+                <td>Product Qty</td>
+                <td>Product Price</td>
+                <td>Vendor Name</td>
+                <td>Product Action</td>
+            </thead>
+
+            {% for pr in products %}
+                <tbody>
+                        <td>{{pr.id}}</td>
+                        <td>{{pr.name}}</td>
+                        <td>{{pr.qty}}</td>
+                        <td>{{pr.price}}</td>
+                        <td>{{pr.vendor.name}}</td>
+                        <td>
+                            <a href="/product/edit/{{pr.id}}">EDIT</a> |
+                            <a href="/product/delete/{{pr.id}}">DELETE</a>
+                        </td>
+                </tbody>
+            {% endfor %}
+
+    </table>
+
+    {% endif %}
+</body>
+</html>
