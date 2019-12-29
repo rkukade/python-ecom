@@ -8,6 +8,7 @@ db = SQLAlchemy(app)
 
 
 class Vendor(db.Model):
+    #this a demo comment dont consider this
     id = db.Column('id', db.Integer(), primary_key=True)
     name = db.Column('vname', db.String(100))
     email = db.Column('vemail', db.String(100), unique=True)
